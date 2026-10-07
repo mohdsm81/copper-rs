@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -931,6 +931,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../Reading-Unified-Logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reading Unified Logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Remote-Debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remote Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../SDK-Features/" class="md-nav__link">
         
   
@@ -995,34 +1051,6 @@
     
   
     FAQ
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Roadmap/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roadmap
   
 
     
@@ -1376,8 +1404,7 @@ fn process(&amp;mut self, _clock: &amp;RobotClock, input: &amp;Self::Input&lt;'_
 }
 </code></pre>
 <p>This is useful for calibration bundles, static transforms, map updates, and other state that is usually unchanged but must still be deterministic in logs and replay. Because the updates are part of the message stream, replay and resimulation see the same state transitions as the live run.</p>
-<p>Note on freeze / thaw: A task internal state can be serialized to give the opportunity for the framework to "snapshot" the system, it would be at a low rate (ie. ~ a second). 
-You can think of it a little bit as a "key frame" in a video. It is useful at replay to be able to jump into a state without having to replay all the previous messages.</p>
+<p>Note on freeze / thaw: Copper periodically serializes component state so replay can seek from a nearby keyframe instead of replaying from the beginning. Keyframe capture does not stop or drain the graph, including background and <code>parallel-rt</code> work, but remains deterministic on replay. Because <code>freeze()</code> runs at the component's normal point in the execution wave, implementations should be side-effect-free and must not allocate on the real-time path.</p>
 
 
 
@@ -1430,7 +1457,7 @@ You can think of it a little bit as a "key frame" in a video. It is useful at re
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -478,6 +478,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#compile-time-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile-Time Constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -541,6 +552,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Logging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-streaming-destinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log streaming destinations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-logging-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local logging settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -592,6 +631,17 @@
     <span class="md-ellipsis">
       
         Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deterministic-stream-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deterministic Stream Reconstruction
       
     </span>
   </a>
@@ -1039,6 +1089,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../Reading-Unified-Logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reading Unified Logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Remote-Debugging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Remote Debugging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../SDK-Features/" class="md-nav__link">
         
   
@@ -1103,34 +1209,6 @@
     
   
     FAQ
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../Roadmap/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roadmap
   
 
     
@@ -1383,6 +1461,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#compile-time-constants" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile-Time Constants
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tasks" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1446,6 +1535,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Logging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#log-streaming-destinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Log streaming destinations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-logging-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Local logging settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1504,6 +1621,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deterministic-stream-reconstruction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deterministic Stream Reconstruction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#further-reading" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1544,6 +1672,44 @@
 )
 </code></pre>
 <p>Most examples name the file <code>copperconfig.ron</code> and reference it with the <code>#[copper_runtime(config = "...")]</code> attribute.</p>
+<h2 id="compile-time-constants">Compile-Time Constants<a class="headerlink" href="#compile-time-constants" title="Permanent link">&para;</a></h2>
+<p>The optional top-level <code>constants</code> array generates Rust constants as part of
+<code>#[copper_runtime]</code>. A numeric constant has a required <code>id</code> and <code>value</code>, plus optional
+placement and representation fields:</p>
+<pre><code class="language-ron">constants: [
+    (id: &quot;MAX_DETECTIONS&quot;, storage: usize, value: 64),
+    (
+        id: &quot;CAMERA_OFFSET&quot;,
+        module: &quot;frames::camera&quot;,
+        quantity: length,
+        unit: millimeter,
+        value: [180.0, 0.0, 310.0],
+    ),
+]
+</code></pre>
+<ul>
+<li><code>module</code> defaults to <code>constants</code>; an explicit relative Rust module path creates a
+  generated module tree.</li>
+<li><code>storage</code> defaults to <code>f32</code> and accepts Rust integer types, <code>f32</code>, or <code>f64</code>.</li>
+<li><code>quantity</code> selects an SI quantity type. <code>unit</code> defaults to that quantity's coherent SI
+  unit, and configured values are normalized when compiled.</li>
+</ul>
+<p>A typed expression constant replaces <code>value</code> and all numeric representation fields with
+both <code>type</code> and <code>expression</code>:</p>
+<pre><code class="language-ron">(
+    id: &quot;WORLD_TO_ROBOT&quot;,
+    module: &quot;transforms&quot;,
+    type: &quot;cu_transform::TypedTransform3D&lt;f32, cu_transform::WorldFrame, cu_transform::RobotFrame&gt;&quot;,
+    expression: &quot;cu_transform::TypedTransform3D::&lt;f32, cu_transform::WorldFrame, cu_transform::RobotFrame&gt;::from_translation_euler_xyz(crate::frames::robot::TRANSLATION, crate::frames::robot::ROTATION)&quot;,
+)
+</code></pre>
+<p>The expression may call const constructors and methods, use struct literals, and reference
+other constants. Rust checks the declared type and const-evaluability. Paths use normal Rust
+scope in the generated module; prefer dependency-qualified paths and <code>crate::...</code> for
+application or generated items.</p>
+<p>Constants are baked into the binary and merge through <code>includes</code> with root-first
+precedence on <code>(module, id)</code>. A runtime configuration that changes a compiled constant
+produces a warning and does not replace the baked value.</p>
 <h2 id="tasks">Tasks<a class="headerlink" href="#tasks" title="Permanent link">&para;</a></h2>
 <p>Tasks are declared under the <code>tasks</code> array. Each task entry is a tuple with the following fields:</p>
 <ul>
@@ -1554,8 +1720,9 @@
 <li><code>config</code> <em>(optional)</em> – map of parameters passed to the task.</li>
 <li><code>resources</code> <em>(optional)</em> – map of task-local resource bindings to <code>bundle.resource</code> references.</li>
 <li><code>missions</code> <em>(optional)</em> – list of mission ids in which this task is active.</li>
+<li><code>background_process_empty</code> <em>(optional)</em> – boolean, defaults to <code>false</code>. Regular background tasks skip empty inputs and emit each completed result once, including on empty-input ticks. Set <code>true</code> to restore dispatch of empty inputs and repeated emission of the last completed result. This policy also works with named background pools; enabling it requires a regular background task.</li>
 <li><code>background</code> <em>(optional)</em> – boolean. <code>true</code> runs an eligible source or regular task on the background thread pool. Omit it or set <code>false</code> for foreground execution.</li>
-<li><code>run_in_sim</code> <em>(optional)</em> – boolean controlling whether a source or sink uses the real implementation in simulation mode instead of a generated stub. It is ignored for regular tasks.</li>
+<li><code>run_in_sim</code> <em>(optional)</em> – boolean controlling whether a source or sink uses the real implementation in simulation mode instead of a generated stub. <strong>Since v1.1:</strong> generated source stubs preserve the complete output pack for multi-output sources, so the simulation callback can fill every port in place. It is ignored for regular tasks.</li>
 <li><code>logging</code> <em>(optional)</em> – per-task message logging settings:</li>
 <li><code>enabled</code> – boolean, defaults to <code>true</code>.</li>
 <li><code>codec</code> – default logging codec id for this task's outputs.</li>
@@ -1588,6 +1755,8 @@
 <ul>
 <li><code>id</code> – bundle id used by task and bridge <code>resources</code> maps.</li>
 <li><code>provider</code> – Rust type that provides the bundle.</li>
+<li><code>resources</code> <em>(optional)</em> – provider input bindings to other <code>bundle.resource</code> slots, resolved at compile time per mission. See <a href="../Resources/#composing-resource-bundles">Resources</a>.</li>
+<li><code>resources</code> <em>(optional)</em> – provider input bindings to other <code>bundle.resource</code> slots. Dependencies are resolved and ordered at compile time per mission; see <a href="../Resources/#composing-resource-bundles">Resources</a>.</li>
 <li><code>config</code> <em>(optional)</em> – provider-specific configuration map.</li>
 <li><code>missions</code> <em>(optional)</em> – mission ids in which the bundle is available.</li>
 </ul>
@@ -1651,13 +1820,48 @@ monitors: [
 ]
 </code></pre>
 <h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
+<h3 id="log-streaming-destinations">Log streaming destinations<a class="headerlink" href="#log-streaming-destinations" title="Permanent link">&para;</a></h3>
+<p>With <code>cu29/logstream</code> enabled, <code>log_streaming.destinations</code> declares statically
+bound packet senders. Each destination has <code>id</code>, <code>transport</code>, <code>link</code>, <code>fec</code>,
+<code>recovery_interval</code>, and <code>max_record_bytes</code>. See
+<a href="https://github.com/copper-project/copper-rs/blob/master/examples/cu_logstream_demo/copperconfig.ron"><code>examples/cu_logstream_demo/copperconfig.ron</code></a>
+for a complete configuration.</p>
+<p>A <strong>keyframe</strong> saves task state. A <strong>recovery point</strong> binds that keyframe to the
+stream manifest and a CopperList boundary, so a receiver can join midway or
+resume after missing data. The receiver verifies the binding before using it.</p>
+<p><code>recovery_interval</code> is directly on the destination and counts CopperLists. It must
+be a nonzero multiple of <code>logging.keyframe_interval</code>. A new recovery point references a
+keyframe captured at the same CopperList ID; the sender retains the latest
+complete recovery bundle for periodic retransmission. Streaming rejects a zero
+keyframe interval. <code>enable_keyframe_logging: false</code> disables local keyframe
+recording, while streaming still requests capture for its recovery points.</p>
+<p>The generated twin writes a capture archive and exposes typed frames. Use
+<code>.archive_only()</code> to record captured outputs without running reconstructed tasks.</p>
+<p>Custom receiver callbacks accept <code>SessionEventRef</code>, borrowing encoded records
+from the router. Failed delivery retains the same bytes for <code>drain_events</code> to
+retry. <code>event.to_owned()</code> explicitly allocates a retained copy. <code>ReceivedManifest</code>
+binds the decoded manifest to its verified wire bytes and is passed by reference
+to <code>NativeArchive::new</code> or <code>CaptureArchive::new</code>.</p>
+<p>Archive continuity records use borrowed slices (<code>StreamContinuityRecord&lt;&amp;[u8]&gt;</code>)
+when writing; offline readers may choose owned bytes. Continuous assembly buffers
+are recycled and grow only as record sizes or concurrency require, within receiver
+limits. Once warmed, packet parsing, assembly, and callback delivery need no heap
+allocations. Session discovery, RaptorQ control decoding, and replay's owned task
+state can still allocate. These ownership choices require no additional RON knobs.</p>
+<h3 id="local-logging-settings">Local logging settings<a class="headerlink" href="#local-logging-settings" title="Permanent link">&para;</a></h3>
 <p>The <code>logging</code> section tunes Copper’s structured log. Options mirror the fields of <code>LoggingConfig</code> defined in <code>core/cu29_runtime/src/config.rs</code>:</p>
 <ul>
 <li><code>enable_task_logging</code> – controls per-task logging (defaults to <code>true</code>).</li>
-<li><code>copperlist_count</code> – number of preallocated CopperLists compiled into the runtime. If set, it must be at least <code>1</code>.</li>
+<li><code>enable_keyframe_logging</code> – controls task-state keyframe capture for local logging (defaults to
+  <code>true</code>). When no downstream output needs keyframes, codegen emits no freeze calls or keyframe log
+  stream and the runtime creates no keyframe capture buffers or worker.</li>
+<li><code>copperlist_count</code> – number of preallocated CopperLists compiled into the runtime. If set, it must be at least <code>1</code>. With <code>async-cl-io</code> and an active output sink, at least <code>2</code> are required: one slot stays available for real-time execution and the other <code>copperlist_count - 1</code> slots form the maximum output backlog. A saturated handoff drops the completed CopperList and increments <code>CopperListIoStats::dropped_copperlists_total</code> rather than blocking the runtime.</li>
 <li><code>slab_size_mib</code> – size of each memory mapped slab in MiB.</li>
 <li><code>section_size_mib</code> – pre‑allocated size per log section in MiB.</li>
-<li><code>keyframe_interval</code> – number of copperlists between two keyframes (default <code>100</code>).</li>
+<li><code>keyframe_interval</code> – number of copperlists between two keyframes (default <code>100</code>). With
+  <code>async-cl-io</code>, keyframes use a bounded handoff with room for two completed captures. If both are
+  still outstanding, Copper skips the next scheduled capture before freezing task state and
+  increments <code>CopperListIoStats::dropped_keyframes_total</code>.</li>
 <li><code>codecs</code> – named logging codec specs reusable by per-task <code>logging.codec</code> and <code>logging.codecs</code>.</li>
 </ul>
 <p>Example from <code>examples/cu_logging_size</code>:</p>
@@ -1666,6 +1870,14 @@ monitors: [
     section_size_mib: 100,
 )
 </code></pre>
+<p>Each present payload using a logging codec is framed by Copper with a fixed
+four-byte little-endian encoded length. The codec writes directly into log storage,
+and Copper fills in the length afterward. During decoding, the codec receives a
+reader limited to its frame and must consume the complete payload. Custom writers
+used for codec logging must support bincode's <code>position</code> and <code>overwrite</code> operations.</p>
+<p>Use the logreader built for the application version that produced the recording;
+codec framing is part of the encoded content, separate from the unified-log file
+and section header version.</p>
 <p>Example with codecs:</p>
 <pre><code class="language-ron">(
     logging: (
@@ -1718,6 +1930,25 @@ for higher-rate loops.</p>
 ]
 </code></pre>
 <p>Included files are processed recursively. Parameters are substituted in the included text using the <code>{{param}}</code> syntax. Merging behaviour and further details are described in the <a href="../Modular-Configuration/">Modular Configuration guide</a>.</p>
+<p><strong>Since v1.1:</strong> An include can be selected by Cargo features at compile time:</p>
+<pre><code class="language-ron">includes: [
+    (
+        path: &quot;graph/jetson_mipi.ron&quot;,
+        when: Feature(&quot;jetson-mipi&quot;),
+    ),
+]
+</code></pre>
+<p>Supported predicates are <code>Feature("name")</code>, <code>Not(predicate)</code>, <code>All([predicates])</code>, and
+<code>Any([predicates])</code>. A rejected include is skipped before its file is read, parsed, or
+validated, so its tasks, connections, and message types do not enter generated Rust.</p>
+<p>Applications using feature predicates must forward their Cargo feature set from <code>build.rs</code>:</p>
+<pre><code class="language-rust">fn main() {
+    cu29_build::emit_cargo_features();
+}
+</code></pre>
+<p>Add <code>cu29-build</code> under <code>[build-dependencies]</code>. Keep the matching component dependency
+optional in <code>Cargo.toml</code>; target-specific dependencies can additionally be placed under a
+<code>[target.'cfg(...)'.dependencies]</code> table. See <code>examples/cu_feature_gated_camera</code>.</p>
 <h2 id="multi-copper-instance-overrides">Multi-Copper Instance Overrides<a class="headerlink" href="#multi-copper-instance-overrides" title="Permanent link">&para;</a></h2>
 <p>Multi-Copper umbrella configs may declare an optional <code>instance_overrides_root</code>:</p>
 <pre><code class="language-ron">(
@@ -1783,6 +2014,20 @@ or bridge config map:</p>
     ],
 )
 </code></pre>
+<h2 id="deterministic-stream-reconstruction">Deterministic Stream Reconstruction<a class="headerlink" href="#deterministic-stream-reconstruction" title="Permanent link">&para;</a></h2>
+<p>A task can omit its output payload from a live stream and reconstruct it on the
+receiver using the same application and Copper version:</p>
+<pre><code class="language-ron">(id: &quot;kinematics&quot;, type: &quot;tasks::Kinematics&quot;, streaming: (replay: reconstruct)),
+</code></pre>
+<p>Reconstruction recomputes outputs from captured inputs, clock, and frozen state.
+It requires an ordinary, synchronous, logged task using the lossless native
+compressed codec and full handle capture. <code>streaming: (replay: capture)</code> is the default.</p>
+<p>Every input to a reconstructed task must come from a node with logging enabled.
+Copper rejects a connection from an unlogged node at compile time, identifying the
+producer, consumer, and message type. For example, an unlogged camera can feed a
+captured detector, whose output feeds reconstructed tracking and planning tasks.
+Reconstructing the detector itself requires captured camera images. Validation
+checks every incoming connection in each mission graph.</p>
 <h2 id="further-reading">Further Reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
 <p>For advanced composition rules and best practices see the <a href="../Modular-Configuration/">Modular Configuration guide</a>.</p>
 
@@ -1837,7 +2082,7 @@ or bridge config map:</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
