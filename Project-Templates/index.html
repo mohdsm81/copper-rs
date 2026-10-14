@@ -493,6 +493,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#self-describing-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-describing logs
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1035,6 +1046,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../Self-Describing-Logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Self-describing logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../Remote-Debugging/" class="md-nav__link">
         
   
@@ -1394,6 +1433,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#self-describing-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Self-describing logs
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1485,6 +1535,11 @@ cargo run -p cu_example_app
 <li><code>cd support/cargo_cunew/templates &amp;&amp; just gen-workspace</code></li>
 </ul>
 <p>Generated host projects include <code>just graph[-log]</code> for topology and <code>just sched[-log]</code> for the generated process order and recorded timing. <code>cargo-cunew</code> asks whether the target is bare-metal/no_std; that choice omits host-only PGS helpers. Host templates also include <code>pgs-baseline</code>, <code>pgs-optimize candidates=3</code>, <code>pgs-candidate candidate=1</code>, and <code>pgs-measure candidates=1</code>. Tune the starter <code>schedule.ron</code> deadline, CPU set, and timing assumptions before using its ranking for a real application.</p>
+<h2 id="self-describing-logs">Self-describing logs<a class="headerlink" href="#self-describing-logs" title="Permanent link">&para;</a></h2>
+<p>Both templates expose <code>self-describing-logs = ["cu29/self-describing-logs"]</code>.
+Enable it with <code>cargo run --features self-describing-logs</code>; the normal application
+builder writes a compressed catalog at startup. See <a href="../Self-Describing-Logs/">Self-Describing Logs</a>
+for external payloads, embedded memory bounds, and offline readers.</p>
 
 
 
